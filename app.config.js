@@ -1,0 +1,54 @@
+export default {
+  expo: {
+    name: "ClubPotros",
+    slug: "potros-app-dev",
+    version: "1.1.3",
+    orientation: "portrait",
+    icon: "./assets/logoPotros.jpg",
+    userInterfaceStyle: "light",
+    splash: {
+      image: "./assets/logoPotros.jpg",
+      resizeMode: "contain",
+      backgroundColor: "#ffffff"
+    },
+    assetBundlePatterns: ["**/*"],
+    plugins: [
+      "expo-font",
+      "expo-video"
+    ],
+    ios: {
+      supportsTablet: true,
+      bundleIdentifier: "com.mx.s1sistem.ClubPotros",
+      buildNumber: "2.0.9",
+      icon: "./assets/logoPotros.jpg",
+      deploymentTarget: "15.1",
+      config: {
+        usesNonExemptEncryption: false
+      },
+      infoPlist: {
+        UIDeviceFamily: [1, 2],
+        UISupportedInterfaceOrientations: [
+          "UIInterfaceOrientationPortrait",
+          "UIInterfaceOrientationPortraitUpsideDown"
+        ],
+        "UISupportedInterfaceOrientations~ipad": [
+          "UIInterfaceOrientationPortrait",
+          "UIInterfaceOrientationPortraitUpsideDown",
+          "UIInterfaceOrientationLandscapeLeft",
+          "UIInterfaceOrientationLandscapeRight"
+        ],
+        NSPhotoLibraryUsageDescription: "Permite acceder a tus fotos para subir imágenes",
+        NSCameraUsageDescription: "Permite tomar fotos para subir a la aplicación"
+      }
+    },
+    android: {
+      package: "com.mx.s1sistem.ClubPotros"
+    },
+    extra: {
+      eas: {
+        projectId: "5f6b94f0-7fd5-4e42-8995-c0b01e0e0d32"
+      }
+    },
+    owner: "ulises933"
+  }
+};
