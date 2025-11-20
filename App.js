@@ -30,7 +30,7 @@ export const navigationRef = createNavigationContainerRef();
 // Flag de pruebas para saltar el video de introducción
 // true  => NO se reproduce el video al inicio
 // false => SÍ se reproduce el video al inicio
-const SKIP_INTRO_FOR_TESTS = true;
+const SKIP_INTRO_FOR_TESTS = false;
 
 // MainTabs SIN el tab de HomeScreen (registro)
 const MainTabs = () => (

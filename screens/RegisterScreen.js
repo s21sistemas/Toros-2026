@@ -21,6 +21,7 @@ import { theme } from '../utils/theme';
 import { registerUser, activateWithToken } from '../utils/authService';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { Ionicons } from '@expo/vector-icons';
+import * as MailComposer from 'expo-mail-composer';
 //b51f28
 const RegisterScreen = ({ navigation }) => {
   const [nombreCompleto, setNombreCompleto] = useState('');
@@ -33,6 +34,7 @@ const RegisterScreen = ({ navigation }) => {
     correo: '',
     telefono: '',
     ocupacion: '',
+    tokenActivacion: '',
   });
   const [tokenActivacion, setTokenActivacion] = useState('');
 
@@ -75,7 +77,7 @@ const RegisterScreen = ({ navigation }) => {
 
   const validateForm = () => {
     let isValid = true;
-    const newErrors = { nombreCompleto: '', correo: '', telefono: '', ocupacion: '' };
+    const newErrors = { nombreCompleto: '', correo: '', telefono: '', ocupacion: '', tokenActivacion: '' };
 
     if (!nombreCompleto.trim()) {
       newErrors.nombreCompleto = 'El nombre completo es obligatorio.';
@@ -87,6 +89,11 @@ const RegisterScreen = ({ navigation }) => {
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(correo)) {
       newErrors.correo = 'El correo no es válido.';
+      isValid = false;
+    }
+
+    if (!tokenActivacion.trim()) {
+      newErrors.tokenActivacion = 'El token de activación es obligatorio.';
       isValid = false;
     }
 
@@ -104,23 +111,120 @@ const RegisterScreen = ({ navigation }) => {
     return querySnapshot.empty;
   };
 
-  const sendEmail = async (email, code, uid) => {
-    try {
-      const response = await fetch('https://test.prostafsse.ngrok.app/sendEmail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, code, uid }),
-      });
+  // Función para construir el HTML del correo
+  const buildEmailHtml = (code, uid) => {
+    const sistemaUrl = `https://sistem.clubpotros.mx/subir-documentos?uid=${encodeURIComponent(uid)}`;
+    const subirDocsUrl = `https://sistem.clubpotros.mx/subir-documentos?uid=${encodeURIComponent(uid)}`;
 
-      const data = await response.json();
-      if (!data.success) {
-        throw new Error('No se pudo enviar el correo.');
+    return `
+      <div style="font-family: Arial, Helvetica, sans-serif; background:#f7f7f7; padding:24px; color:#222;">
+        <div style="max-width:720px; margin:0 auto; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06)">
+          <div style="background:#b30d1b; color:#fff; text-align:center; padding:28px 16px; font-size:28px; font-weight:700;">¡Pre-registro exitoso!</div>
+          <div style="padding:24px 28px;">
+            <h2 style="margin:0 0 8px 0; font-size:22px;">Bienvenido(a)</h2>
+            <p style="margin:0 0 16px 0; line-height:1.5;">
+              Gracias por completar su pre-registro. Hemos guardado sus datos correctamente y estamos emocionados de tenerle con nosotros.
+            </p>
+            <div style="margin:24px 0; border:1px solid #e6e6e6; border-radius:8px; padding:18px; text-align:center;">
+              <div style="font-weight:700; color:#b30d1b; margin-bottom:8px;">Su código de acceso</div>
+              <div style="display:inline-block; padding:12px 20px; border:2px dashed #b30d1b; border-radius:6px; font-size:24px; letter-spacing:2px; font-weight:700;">${code}</div>
+              <p style="margin:10px 0 0 0; color:#666; font-size:12px;">Este código es confidencial, no lo comparta con nadie.</p>
+            </div>
+            <div style="margin:24px 0; background:#f5f7f6; border-left:6px solid #2d7a33; border-radius:8px; padding:22px;">
+              <div style="text-align:center; font-size:26px; font-weight:800; color:#207a31; margin-bottom:8px;">Completa tu inscripción</div>
+              <p style="margin:0 0 16px 0; text-align:center; color:#333;">Para finalizar el proceso y ser parte oficial del club, necesitamos que subas los siguientes documentos:</p>
+              <div style="max-width:640px; margin:0 auto;">
+                <div style="display:flex; align-items:flex-start; gap:10px; margin:10px 0;">
+                  <div style="min-width:28px; height:28px; border-radius:50%; background:#2d7a33; color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center;">1</div>
+                  <div style="color:#222;">Identificación oficial (INE o pasaporte)</div>
+                </div>
+                <div style="display:flex; align-items:flex-start; gap:10px; margin:10px 0;">
+                  <div style="min-width:28px; height:28px; border-radius:50%; background:#2d7a33; color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center;">2</div>
+                  <div style="color:#222;">Comprobante de domicilio</div>
+                </div>
+                <div style="display:flex; align-items:flex-start; gap:10px; margin:10px 0;">
+                  <div style="min-width:28px; height:28px; border-radius:50%; background:#2d7a33; color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center;">3</div>
+                  <div style="color:#222;">Documentación adicional requerida</div>
+                </div>
+              </div>
+              <div style="text-align:center; margin-top:18px;">
+                <a href="${subirDocsUrl}" style="display:inline-block; padding:12px 22px; background:#2d7a33; color:#fff; text-decoration:none; font-weight:700; border-radius:6px;">Subir Documentos</a>
+                <div style="margin-top:10px; color:#6b7280; font-size:13px;">Recuerda hacerlo a la brevedad posible</div>
+              </div>
+            </div>
+            <div style="text-align:center; margin:24px 0 12px;">
+              <a href="${sistemaUrl}" style="display:inline-block; margin:8px; padding:12px 18px; background:#b30d1b; color:#fff; text-decoration:none; font-weight:600; border-radius:6px;">Iniciar Sesión</a>
+              <a href="${subirDocsUrl}" style="display:inline-block; margin:8px; padding:12px 18px; background:#2d7a33; color:#fff; text-decoration:none; font-weight:600; border-radius:6px;">Subir Documentos</a>
+            </div>
+            <div style="margin-top:24px; color:#666; font-size:14px;">
+              Si tiene alguna pregunta o necesita asistencia, no dude en contactarnos.
+            </div>
+            <div style="margin-top:16px; color:#b30d1b; font-weight:700;">Equipo de soporte Club Potros</div>
+          </div>
+          <div style="background:#2f2f2f; color:#fff; text-align:center; padding:16px; font-size:12px;">
+            © 2025 <strong>Club Potros</strong>. Todos los derechos reservados.<br/>
+            <a href="mailto:info@clubpotros.mx" style="color:#fff; text-decoration:none;">info@clubpotros.mx</a> | <a href="tel:+528120039628" style="color:#fff; text-decoration:none;">8120039628</a>
+          </div>
+        </div>
+      </div>
+    `;
+  };
+
+  // Función para enviar correo usando el cliente nativo
+  const sendEmailNative = async (email, code, uid) => {
+    try {
+      const isAvailable = await MailComposer.isAvailableAsync();
+      
+      if (!isAvailable) {
+        // Si no hay cliente de correo, mostrar el código en pantalla
+        Alert.alert(
+          'Código de acceso',
+          `Tu código de acceso es: ${code}\n\nGuarda este código de forma segura.`,
+          [{ text: 'OK' }]
+        );
+        return;
       }
-    } catch (err) {
-      console.error('Error al enviar el correo:', err);
-      throw new Error('No se pudo enviar el correo. El código de acceso es: ' + code);
+
+      const html = buildEmailHtml(code, uid);
+      const subject = 'Tu código de acceso a Club Potros - Completa tu inscripción';
+      
+      // Texto plano alternativo (para clientes que no soportan HTML)
+      const bodyText = `¡Pre-registro exitoso!
+
+Bienvenido(a)
+
+Gracias por completar su pre-registro. Hemos guardado sus datos correctamente y estamos emocionados de tenerle con nosotros.
+
+Su código de acceso: ${code}
+
+Este código es confidencial, no lo comparta con nadie.
+
+Completa tu inscripción:
+Para finalizar el proceso y ser parte oficial del club, necesitamos que subas los siguientes documentos:
+1. Identificación oficial (INE o pasaporte)
+2. Comprobante de domicilio
+3. Documentación adicional requerida
+
+Visita: https://sistem.clubpotros.mx/subir-documentos?uid=${uid}
+
+Equipo de soporte Club Potros
+info@clubpotros.mx | 8120039628`;
+
+      await MailComposer.composeAsync({
+        recipients: [email],
+        subject: subject,
+        body: bodyText,
+        isHtml: true,
+        htmlBody: html,
+      });
+    } catch (error) {
+      console.error('Error al abrir cliente de correo:', error);
+      // Si falla, mostrar el código en pantalla
+      Alert.alert(
+        'Código de acceso',
+        `Tu código de acceso es: ${code}\n\nGuarda este código de forma segura.`,
+        [{ text: 'OK' }]
+      );
     }
   };
 
@@ -163,29 +267,21 @@ const RegisterScreen = ({ navigation }) => {
         codigoAcceso,
       });
 
-      // Enviar correo con el código
-      Alert.alert(
-        'Enviando código de acceso',
-        'Estamos enviando el código a tu correo electrónico...',
-        [],
-        { cancelable: false }
-      );
-
-      await sendEmail(correo, codigoAcceso, created.id);
-
-      // Si el usuario proporcionó token de activación, activarlo
-      if (tokenActivacion && tokenActivacion.trim().length > 0) {
-        try {
-          await activateWithToken({ userId: created.id, userName: nombreCompleto, token: tokenActivacion.trim() });
-        } catch (e) {
-          console.warn('Token no activado:', e?.message);
-        }
+      // Activar con token (obligatorio)
+      try {
+        await activateWithToken({ userId: created.id, userName: nombreCompleto, token: tokenActivacion.trim() });
+      } catch (e) {
+        console.error('Error al activar token:', e?.message);
+        throw new Error(e?.message || 'El token de activación no es válido. Verifica que el token sea correcto.');
       }
+    
+      // Abrir cliente de correo nativo para enviar el código
+      await sendEmailNative(correo, codigoAcceso, created.id);
     
       // Éxito - mostrar mensaje y redirigir
       showAlert(
         '¡Registro exitoso!', 
-        `Usuario registrado correctamente. Tu código de acceso ha sido enviado a tu correo electrónico.`, 
+        `Usuario registrado correctamente. Se abrirá tu cliente de correo para enviar tu código de acceso.`, 
         true
       );
 
@@ -268,13 +364,15 @@ const RegisterScreen = ({ navigation }) => {
                   {errors.ocupacion ? <Text style={styles.errorText}>{errors.ocupacion}</Text> : null}
 
                   <TextInput
-                    style={[styles.input]}
-                    placeholder="Token de activación (opcional)"
+                    style={[styles.input, errors.tokenActivacion ? styles.inputError : null]}
+                    placeholder="Token de activación *"
                     placeholderTextColor="#999"
                     value={tokenActivacion}
                     onChangeText={setTokenActivacion}
+                    autoCapitalize="characters"
                     editable={!loading}
                   />
+                  {errors.tokenActivacion ? <Text style={styles.errorText}>{errors.tokenActivacion}</Text> : null}
 
                   <Pressable 
                     style={({ pressed }) => [

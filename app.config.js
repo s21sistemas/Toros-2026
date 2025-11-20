@@ -42,7 +42,18 @@ export default {
       }
     },
     android: {
-      package: "com.mx.s1sistem.ClubPotros"
+      package: "com.mx.s1sistem.ClubPotros",
+      versionCode: 1,
+      adaptiveIcon: {
+        foregroundImage: "./assets/logoPotros.jpg",
+        backgroundColor: "#ffffff"
+      },
+      permissions: [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_MEDIA_IMAGES"
+      ]
     },
     extra: {
       eas: {
