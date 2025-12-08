@@ -5,13 +5,13 @@ import {
   TextInput, 
   TouchableOpacity, 
   StyleSheet, 
-  SafeAreaView, 
   Alert, 
   Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 // Ya no usamos Firebase Auth, solo Firestore
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';

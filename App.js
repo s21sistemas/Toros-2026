@@ -30,7 +30,7 @@ export const navigationRef = createNavigationContainerRef();
 // Flag de pruebas para saltar el video de introducción
 // true  => NO se reproduce el video al inicio
 // false => SÍ se reproduce el video al inicio
-const SKIP_INTRO_FOR_TESTS = false;
+const SKIP_INTRO_FOR_TESTS = true;
 
 // MainTabs SIN el tab de HomeScreen (registro)
 const MainTabs = () => (
@@ -47,7 +47,7 @@ const MainTabs = () => (
       },
       tabBarActiveTintColor: theme.colors.primary,
       tabBarInactiveTintColor: theme.colors.muted,
-      tabBarStyle: { backgroundColor: theme.colors.surface, borderTopColor: theme.colors.border, height: 58 },
+      tabBarStyle: { backgroundColor: theme.colors.surface, borderTopColor: theme.colors.border },
       tabBarLabelStyle: { fontSize: 12, marginBottom: 6 },
       headerShown: false,
     })}

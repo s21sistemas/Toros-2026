@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
   Alert,
   Image,
   KeyboardAvoidingView,
@@ -14,6 +13,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';

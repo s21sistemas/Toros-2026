@@ -5,12 +5,12 @@ import {
   StyleSheet, 
   ActivityIndicator,
   TouchableOpacity,
-  SafeAreaView,
   Dimensions,
   Platform,
   FlatList,
   RefreshControl, ScrollView
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';

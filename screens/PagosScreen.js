@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
-  View, Text, StyleSheet,TouchableOpacity, Linking, ScrollView, ActivityIndicator, Dimensions, SafeAreaView, Platform, Image, Alert, } from "react-native";
-
+  View, Text, StyleSheet,TouchableOpacity, Linking, ScrollView, ActivityIndicator, Dimensions, Platform, Image, Alert, } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar } from "react-native-calendars";
 import { collection, query, where, onSnapshot, getDoc, doc } from "firebase/firestore";
 import { db } from "../firebaseConfig";

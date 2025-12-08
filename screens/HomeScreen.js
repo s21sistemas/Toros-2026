@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   View, Text, TouchableOpacity, StyleSheet, Alert, TextInput,
   Animated, Platform, PanResponder, Linking, ActivityIndicator,
-  Image, Button, SafeAreaView, ScrollView, KeyboardAvoidingView
+  Image, Button, ScrollView, KeyboardAvoidingView
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { captureRef } from 'react-native-view-shot';
@@ -1986,11 +1987,18 @@ useEffect(() => {
   }, [formData.fecha_nacimiento, formData.sexo, formData.tipo_inscripcion]);
 
   const onChangeMobile = (event, selectedDate) => {
-    setShowPicker(true);
+    if (event.type === "dismissed") {
+      setShowPicker(false);
+      return;
+    }
+
+    setShowPicker(false); // Cerrar el modal
+
     if (selectedDate) {
       updateDate(selectedDate);
     }
   };
+
 
   const updateDate = (newDate) => {
     const validDate = new Date(newDate);

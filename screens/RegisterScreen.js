@@ -6,7 +6,6 @@ View,
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
   Alert,
   Image,
   KeyboardAvoidingView,
@@ -16,6 +15,7 @@ View,
   Keyboard,
   Pressable,ActivityIndicator
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { db } from '../firebaseConfig';
 import { theme } from '../utils/theme';
 import { registerUser, activateWithToken } from '../utils/authService';

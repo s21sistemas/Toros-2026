@@ -21,6 +21,7 @@ const IntroVideoScreen = ({ onVideoEnd }) => {
 
     // Esperar a que el video esté listo antes de reproducir
     const readySubscription = player.addListener('statusChange', (status) => {
+      console.log(status);
       if (status.status === 'readyToPlay' && !isReady) {
         setIsReady(true);
         // Reproducir el video cuando esté listo
@@ -33,10 +34,15 @@ const IntroVideoScreen = ({ onVideoEnd }) => {
       }
     });
 
-    // También intentar reproducir inmediatamente por si ya está listo
     if (player.status === 'readyToPlay') {
       setIsReady(true);
-      player.play();
+      setTimeout(() => {
+        player.play();
+        Animated.parallel([
+          Animated.timing(overlayOpacity, { toValue: 0, duration: 600, useNativeDriver: true }),
+          Animated.timing(videoOpacity, { toValue: 1, duration: 600, useNativeDriver: true }),
+        ]).start();
+      }, 50);
     }
 
     return () => {
@@ -100,7 +106,7 @@ const IntroVideoScreen = ({ onVideoEnd }) => {
           style={styles.video}
           contentFit="cover"
           nativeControls={false}
-          allowsFullscreen={false}
+          fullscreenOptions={{ allowsFullscreen: false }}
           allowsPictureInPicture={false}
           pointerEvents="none"
           // Asegurar que el video ocupe toda la pantalla
@@ -142,8 +148,7 @@ const styles = StyleSheet.create({
     left: 0,
   },
   video: {
-    width: width,
-    height: height,
+    ...StyleSheet.absoluteFillObject,
   },
   overlay: {
     position: 'absolute',
