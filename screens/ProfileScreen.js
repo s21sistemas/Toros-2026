@@ -8,7 +8,8 @@ import {
   ActivityIndicator,
   ScrollView,
   Alert,
-  RefreshControl
+  RefreshControl,
+  Linking,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -201,10 +202,26 @@ const ProfileScreen = ({ navigation }) => {
           setLoading(false);
         }
       };
-      
+
       loadData();
     }
   }, [loginData.id]);
+
+  const handleUploadDocuments = () => {
+    if (!loginData.id) {
+      Alert.alert(
+        'Error',
+        'No se pudo obtener tu identificador de usuario. Intenta recargar la pantalla.'
+      );
+      return;
+    }
+
+    const url = `https://sistem.clubpotros.mx/subir-documentos?uid=${loginData.id}`;
+
+    Linking.openURL(url).catch(() => {
+      Alert.alert('Error', 'No se pudo abrir el navegador para subir documentos.');
+    });
+  };
 
   const getStatusStyle = (status) => {
     console.log(status);
@@ -326,7 +343,7 @@ const ProfileScreen = ({ navigation }) => {
         )}
       </View>
 
-      <ScrollView 
+      <ScrollView
         style={styles.mainContent}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
@@ -417,15 +434,31 @@ const ProfileScreen = ({ navigation }) => {
         )}
       </ScrollView>
 
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => navigation.navigate('RegistrarJugador')}
-      >
-        <View style={styles.addButtonContent}>
-          <Ionicons name="add" size={24} color="#fff" />
-          <Text style={styles.addButtonText}>Registrar</Text>
-        </View>
-      </TouchableOpacity>
+      <View style={styles.fabContainer}>
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => navigation.navigate('RegistrarJugador')}
+        >
+          <View style={styles.addButtonContent}>
+            <Ionicons name="add" size={24} color="#fff" />
+            <Text style={styles.addButtonText}>Registrar</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.addButton, styles.uploadButton]}
+          onPress={handleUploadDocuments}
+        >
+          <View style={styles.addButtonContent}>
+            <MaterialCommunityIcons
+              name="file-upload-outline"
+              size={22}
+              color="#fff"
+            />
+            <Text style={styles.addButtonText}>Subir documentos</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
 
       {error && (
         <View style={styles.errorContainer}>
@@ -590,10 +623,16 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     fontStyle: 'italic',
   },
-  addButton: {
+  fabContainer: {
     position: 'absolute',
     bottom: 30,
     right: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    zIndex: 100,
+  },
+  addButton: {
     backgroundColor: theme.colors.primary,
     borderRadius: 30,
     paddingHorizontal: 20,
@@ -601,7 +640,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     ...theme.shadow.card,
-    zIndex: 100,
+  },
+  uploadButton: {
+    backgroundColor: '#2c3e50',
   },
   addButtonContent: {
     flexDirection: 'row',

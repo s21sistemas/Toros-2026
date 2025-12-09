@@ -57,9 +57,9 @@ export default {
     },
     extra: {
       eas: {
-        projectId: "87740b82-0e82-4a0a-aa26-664ce3a12f48"
+        projectId: "5f6b94f0-7fd5-4e42-8995-c0b01e0e0d32"
       }
     },
-    owner: "quesad300"
+    owner: "ulises933"
   }
 };
