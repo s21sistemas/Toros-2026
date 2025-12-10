@@ -9,6 +9,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { theme } from './utils/theme';
 import { onAuthStateChanged, getCurrentUser, signOut } from './utils/session';
+import * as SplashScreen from 'expo-splash-screen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Importar pantallas
 import IntroVideoScreen from './screens/IntroVideoScreen';
@@ -30,7 +32,7 @@ export const navigationRef = createNavigationContainerRef();
 // Flag de pruebas para saltar el video de introducción
 // true  => NO se reproduce el video al inicio
 // false => SÍ se reproduce el video al inicio
-const SKIP_INTRO_FOR_TESTS = true;
+const SKIP_INTRO_FOR_TESTS = null;
 
 // MainTabs SIN el tab de HomeScreen (registro)
 const MainTabs = () => (
@@ -61,7 +63,9 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authError, setAuthError] = useState(null);
-  const [showIntroVideo, setShowIntroVideo] = useState(!SKIP_INTRO_FOR_TESTS);
+  const [showIntroVideo, setShowIntroVideo] = useState(SKIP_INTRO_FOR_TESTS);
+
+  SplashScreen.preventAutoHideAsync();
 
   useEffect(() => {
     let unsubscribe;
@@ -110,16 +114,24 @@ const App = () => {
     };
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const watched = await AsyncStorage.getItem("intro_watched");
+        if (watched === "yes") {
+          setShowIntroVideo(false);
+        } else {
+          setShowIntroVideo(true);
+        }
+      } catch (e) {
+        setShowIntroVideo(true);
+      }
+    })();
+  }, []);
+
   // Si está cargando o mostrando el video intro, mostrar solo eso
-  if (isLoading || showIntroVideo) {
-    if (showIntroVideo && !isLoading) {
-      return (
-        <SafeAreaProvider>
-          <StatusBar hidden />
-          <IntroVideoScreen onVideoEnd={() => setShowIntroVideo(false)} />
-        </SafeAreaProvider>
-      );
-    }
+  if (showIntroVideo === null || isLoading) {
+    SplashScreen.hideAsync().catch(() => {});
     return (
       <SafeAreaProvider>
         <View style={styles.loadingContainer}>
@@ -127,6 +139,20 @@ const App = () => {
           <Text style={styles.loadingText}>Cargando ClubPotros...</Text>
         </View>
         <StatusBar style="light" backgroundColor="#b51f28" />
+      </SafeAreaProvider>
+    );
+  }
+  
+  if (showIntroVideo) {
+    return (
+      <SafeAreaProvider>
+        <StatusBar hidden />
+        <IntroVideoScreen
+          onVideoEnd={async () => {
+            await AsyncStorage.setItem("intro_watched", "yes");
+            setShowIntroVideo(false);
+          }}
+        />
       </SafeAreaProvider>
     );
   }
