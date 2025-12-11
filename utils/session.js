@@ -6,6 +6,7 @@ const listeners = new Set();
 
 export async function getCurrentUser() {
   const raw = await AsyncStorage.getItem(AUTH_KEY);
+  // console.log("STORED SESSION VALUE:", raw);
   return raw ? JSON.parse(raw) : null;
 }
 
