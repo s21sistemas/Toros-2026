@@ -3,20 +3,21 @@ import { getFirestore } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAxQEbSBtaSwO76yNhHpGst63jWZkqkzxE',
-  authDomain: 'potros-632ee.firebaseapp.com',
-  projectId: 'potros-632ee',
-  storageBucket: 'potros-632ee.firebasestorage.app',
-  messagingSenderId: '715399204517',
-  appId: '1:715399204517:web:6f82c57e723c47931b074c'
-}
+  apiKey: "AIzaSyAtGUX2LG4Ua6IQO1Cf9PuMP4GkZ80RA50",
+  authDomain: "toros-1453e.firebaseapp.com",
+  projectId: "toros-1453e",
+  storageBucket: "toros-1453e.firebasestorage.app",
+  messagingSenderId: "898581498892",
+  appId: "1:898581498892:web:48e49c9bd5a0e15ed8f229"
+};
+
 
 // Inicializa Firebase
 const app = initializeApp(firebaseConfig)
 
-// Firestore apuntando EXCLUSIVAMENTE a la base de datos 'potros2-202dc'
+// Firestore apuntando EXCLUSIVAMENTE a la base de datos 'Toros2-202dc'
 // getFirestore acepta el databaseId como segundo parámetro
-const db = getFirestore(app, 'potros2-202dc')
+const db = getFirestore(app, 'newtoros')
 
 // Verificar que se está usando la base de datos correcta
 console.log('Firestore inicializado con databaseId:', db._databaseId?.database || db._delegate?._databaseId?.database || 'verificando...')

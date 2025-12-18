@@ -2862,8 +2862,8 @@ const DocumentacionForm = ({ formData, setFormData, onSubmit, uploadProgress, cu
                             </TouchableOpacity>
                             <Text style={styles.declarationText}>
                               Declaro bajo protesta de decir verdad que la información y documentación proporcionada en esta 
-                              aplicación y presentada al Club Potros es verídica, por lo que en caso de existir falsedad en 
-                              ella deslindo de toda responsabilidad al Club Potros y tengo pleno conocimiento que se aplicarán 
+                              aplicación y presentada al Club Toros es verídica, por lo que en caso de existir falsedad en 
+                              ella deslindo de toda responsabilidad al Club Toros y tengo pleno conocimiento que se aplicarán 
                               las sanciones administrativas y penas establecidas en los ordenamientos del reglamento 
                               establecido por la liga.
                             </Text>
@@ -2873,7 +2873,7 @@ const DocumentacionForm = ({ formData, setFormData, onSubmit, uploadProgress, cu
           <Text style={styles.regulationTitle}>Reglamento del Equipo</Text>
           
           <TouchableOpacity 
-            onPress={() => Linking.openURL('https://clubpotros.mx/politicas/ReglamentoPotros.pdf')} 
+            onPress={() => Linking.openURL('https://admin.clubtoros.com/politicas/ReglamentoToros.pdf')} 
             style={styles.regulationLink}
           >
             <Text style={styles.regulationLinkText}>Descargue, lea y firme el reglamento</Text>

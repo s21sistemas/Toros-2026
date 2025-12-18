@@ -96,7 +96,7 @@ const LoginScreen = ({ navigation }) => {
               <View style={styles.headerContainer}>
                 <View style={styles.logoCircle}>
                   <Image
-                    source={require('../assets/logoPotros.jpg')}
+                    source={require('../assets/logoToros.jpg')}
                     style={styles.logoImage}
                     resizeMode="cover"
                   />

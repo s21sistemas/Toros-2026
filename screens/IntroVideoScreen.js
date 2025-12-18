@@ -117,8 +117,8 @@ const IntroVideoScreen = ({ onVideoEnd }) => {
       {/* Overlay de marca y loader, se desvanece al estar listo */}
       <Animated.View style={[styles.overlay, { opacity: overlayOpacity }]} pointerEvents="none">
         <View style={styles.brandBox}>
-          <Image source={require('../assets/logoPotros.jpg')} style={styles.logo} resizeMode="cover" />
-          <Text style={styles.title}>Club Potros</Text>
+          <Image source={require('../assets/logoToros.jpg')} style={styles.logo} resizeMode="cover" />
+          <Text style={styles.title}>Club Toros</Text>
           <Text style={styles.subtitle}>Preparando tu experiencia...</Text>
           <ActivityIndicator size="small" color="#ffffff" style={styles.loader} />
         </View>

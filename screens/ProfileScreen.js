@@ -216,7 +216,7 @@ const ProfileScreen = ({ navigation }) => {
       return;
     }
 
-    const url = `https://sistem.clubpotros.mx/subir-documentos?uid=${loginData.id}`;
+    const url = `https://sistem.clubtoros.com/subir-documentos?uid=${loginData.id}`;
 
     Linking.openURL(url).catch(() => {
       Alert.alert('Error', 'No se pudo abrir el navegador para subir documentos.');

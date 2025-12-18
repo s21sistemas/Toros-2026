@@ -1,13 +1,13 @@
 export default {
   expo: {
-    name: "ClubPotros",
-    slug: "potros-app-dev",
+    name: "ClubToros",
+    slug: "toros-app-dev",
     version: "2.1.0",
     orientation: "portrait",
-    icon: "./assets/logoPotros.jpg",
+    icon: "./assets/logoToros.jpg",
     userInterfaceStyle: "light",
     splash: {
-      image: "./assets/logoPotros.jpg",
+      image: "./assets/logoToros.jpg",
       resizeMode: "contain",
       backgroundColor: "#ffffff"
     },
@@ -18,9 +18,9 @@ export default {
     ],
     ios: {
       supportsTablet: true,
-      bundleIdentifier: "com.mx.s1sistem.ClubPotros",
+      bundleIdentifier: "com.mx.s1sistem.ClubToros",
       buildNumber: "3.1.0",
-      icon: "./assets/logoPotros.jpg",
+      icon: "./assets/logoToros.jpg",
       deploymentTarget: "15.1",
       config: {
         usesNonExemptEncryption: false
@@ -42,10 +42,10 @@ export default {
       }
     },
     android: {
-      package: "com.mx.s1sistem.ClubPotros",
+      package: "com.mx.s1sistem.ClubToros",
       versionCode: 10,
       adaptiveIcon: {
-        foregroundImage: "./assets/logoPotros.jpg",
+        foregroundImage: "./assets/logoToros.jpg",
         backgroundColor: "#ffffff"
       },
       permissions: [

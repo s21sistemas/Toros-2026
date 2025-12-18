@@ -278,7 +278,7 @@ const generatePDF = async (pago) => {
     try {
       if (Platform.OS !== 'web') {
         try {
-          const image = require('../assets/logoPotros.jpg');
+          const image = require('../assets/logoToros.jpg');
           logoBase64 = await FileSystem.readAsStringAsync(
             Image.resolveAssetSource(image).uri, 
             { encoding: FileSystem.EncodingType.Base64 }
@@ -288,7 +288,7 @@ const generatePDF = async (pago) => {
           console.warn('No se pudo cargar la imagen del logo:', imageError);
         }
       } else {
-        logoBase64 = '/logoPotros.jpg';
+        logoBase64 = '/logoToros.jpg';
       }
   
       const today = new Date();
@@ -298,7 +298,7 @@ const generatePDF = async (pago) => {
         year: 'numeric'
       });
 
-      let logo = 'https://admin.clubpotros.mx/assets/logo-Cgbns5w4.png';
+      let logo = 'https://admin.clubtoros.com/assets/logo-DbCcPG7U.png';
 
       const html = `
       <html>
@@ -408,10 +408,10 @@ const generatePDF = async (pago) => {
         <body>
           <div class="container">
             <div class="header">
-              ${logo ? `<img src="${logo}" class="logo" alt="Logo Club Potros" />` : ''}
+              ${logo ? `<img src="${logo}" class="logo" alt="Logo Club Toros" />` : ''}
               <div class="header-content">
-                <div class="club-name">CLUB POTROS DE LA ANÁHUAC</div>
-                <div class="club-subtitle">FRATERNIDAD LEGÍTIMOS POTROS, A.C.</div>
+                <div class="club-name">CLUB Toros DE LA ANÁHUAC</div>
+                <div class="club-subtitle">FRATERNIDAD LEGÍTIMOS Toros, A.C.</div>
                 <div class="club-address">Porfirio Barba Jacob No. 901, Col. Anáhuac, San Nicolás de los Garza, N.L.</div>
                 <div class="club-phone">Tel. 81-2003-9628</div>
               </div>
@@ -496,7 +496,7 @@ const generatePDF = async (pago) => {
             </div>
   
             <div class="footer">
-              Documento generado el ${formattedDate} - Club Potros © ${today.getFullYear()}
+              Documento generado el ${formattedDate} - Club Toros © ${today.getFullYear()}
             </div>
           </div>
         </body>
@@ -505,7 +505,7 @@ const generatePDF = async (pago) => {
   
        if (Platform.OS === 'web') {
               const printWindow = window.open('', '_blank');
-              printWindow.document.write(html.replace('../assets/LogoPotros.jpg', '/assets/LogoPotros.jpg'));
+              printWindow.document.write(html.replace('../assets/LogoToros.jpg', '/assets/LogoToros.jpg'));
               printWindow.document.close();
               printWindow.print();
             } else {

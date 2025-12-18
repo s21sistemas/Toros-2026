@@ -113,8 +113,8 @@ const RegisterScreen = ({ navigation }) => {
 
   // Función para construir el HTML del correo
   const buildEmailHtml = (code, uid) => {
-    const sistemaUrl = `https://sistem.clubpotros.mx/subir-documentos?uid=${encodeURIComponent(uid)}`;
-    const subirDocsUrl = `https://sistem.clubpotros.mx/subir-documentos?uid=${encodeURIComponent(uid)}`;
+    const sistemaUrl = `https://sistem.clubtoros.com/subir-documentos?uid=${encodeURIComponent(uid)}`;
+    const subirDocsUrl = `https://sistem.clubtoros.com/subir-documentos?uid=${encodeURIComponent(uid)}`;
 
     return `
       <div style="font-family: Arial, Helvetica, sans-serif; background:#f7f7f7; padding:24px; color:#222;">
@@ -159,11 +159,11 @@ const RegisterScreen = ({ navigation }) => {
             <div style="margin-top:24px; color:#666; font-size:14px;">
               Si tiene alguna pregunta o necesita asistencia, no dude en contactarnos.
             </div>
-            <div style="margin-top:16px; color:#b30d1b; font-weight:700;">Equipo de soporte Club Potros</div>
+            <div style="margin-top:16px; color:#b30d1b; font-weight:700;">Equipo de soporte Club Toros</div>
           </div>
           <div style="background:#2f2f2f; color:#fff; text-align:center; padding:16px; font-size:12px;">
-            © 2025 <strong>Club Potros</strong>. Todos los derechos reservados.<br/>
-            <a href="mailto:info@clubpotros.mx" style="color:#fff; text-decoration:none;">info@clubpotros.mx</a> | <a href="tel:+528120039628" style="color:#fff; text-decoration:none;">8120039628</a>
+            © 2025 <strong>Club Toros</strong>. Todos los derechos reservados.<br/>
+            <a href="mailto:info@clubtoros.com" style="color:#fff; text-decoration:none;">info@clubToros.mx</a> | <a href="tel:+528120039628" style="color:#fff; text-decoration:none;">8120039628</a>
           </div>
         </div>
       </div>
@@ -186,7 +186,7 @@ const RegisterScreen = ({ navigation }) => {
       }
 
       const html = buildEmailHtml(code, uid);
-      const subject = 'Tu código de acceso a Club Potros - Completa tu inscripción';
+      const subject = 'Tu código de acceso a Club Toros - Completa tu inscripción';
       
       // Texto plano alternativo (para clientes que no soportan HTML)
       const bodyText = `¡Pre-registro exitoso!
@@ -205,10 +205,10 @@ Para finalizar el proceso y ser parte oficial del club, necesitamos que subas lo
 2. Comprobante de domicilio
 3. Documentación adicional requerida
 
-Visita: https://sistem.clubpotros.mx/subir-documentos?uid=${uid}
+Visita: https://sistem.clubtoros.com/subir-documentos?uid=${uid}
 
-Equipo de soporte Club Potros
-info@clubpotros.mx | 8120039628`;
+Equipo de soporte Club Toros
+info@clubToros.mx | 8120039628`;
 
       await MailComposer.composeAsync({
         recipients: [email],

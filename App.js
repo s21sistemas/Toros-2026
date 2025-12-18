@@ -136,7 +136,7 @@ const App = () => {
       <SafeAreaProvider>
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#b51f28" />
-          <Text style={styles.loadingText}>Cargando ClubPotros...</Text>
+          <Text style={styles.loadingText}>Cargando ClubToros...</Text>
         </View>
         <StatusBar style="light" backgroundColor="#b51f28" />
       </SafeAreaProvider>
