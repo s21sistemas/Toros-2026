@@ -410,8 +410,8 @@ const generatePDF = async (pago) => {
             <div class="header">
               ${logo ? `<img src="${logo}" class="logo" alt="Logo Club Toros" />` : ''}
               <div class="header-content">
-                <div class="club-name">CLUB Toros DE LA ANÁHUAC</div>
-                <div class="club-subtitle">FRATERNIDAD LEGÍTIMOS Toros, A.C.</div>
+                <div class="club-name">CLUB TOROS DE LA ANÁHUAC</div>
+                <div class="club-subtitle">FRATERNIDAD LEGÍTIMOS TOROS, A.C.</div>
                 <div class="club-address">Porfirio Barba Jacob No. 901, Col. Anáhuac, San Nicolás de los Garza, N.L.</div>
                 <div class="club-phone">Tel. 81-2003-9628</div>
               </div>
