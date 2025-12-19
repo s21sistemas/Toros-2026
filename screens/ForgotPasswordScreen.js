@@ -15,6 +15,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 // Ya no usamos Firebase Auth, solo Firestore
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { theme } from '../utils/theme';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -165,13 +166,13 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontFamily: 'MiFuente',
     fontSize: 32,
-    color: '#b51f28',
+    color: theme.colors.primary,
     textAlign: 'center',
     marginBottom: 5,
   },
   subtitle: {
     fontSize: 14,
-    color: '#666',
+    color: theme.colors.muted,
     textAlign: 'center',
     fontStyle: 'italic',
   },
@@ -198,13 +199,13 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   loginButton: {
-    backgroundColor: '#b51f28',
+    backgroundColor: theme.colors.primary,
     paddingVertical: 15,
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
-    shadowColor: '#b51f28',
+    shadowColor: theme.colors.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 5,

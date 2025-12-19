@@ -78,7 +78,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={['#d32f2f', '#b71c1c']}
+        colors={['#c79b17', '#c79b17']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.gradient}
@@ -134,7 +134,7 @@ const LoginScreen = ({ navigation }) => {
 
                 <TouchableOpacity onPress={handleLogin} activeOpacity={0.9}>
                   <LinearGradient
-                    colors={['#e53935', '#b71c1c']}
+                    colors={['#fbbe08', '#fbbe08']}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
                     style={styles.loginButton}

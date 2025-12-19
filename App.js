@@ -135,10 +135,10 @@ const App = () => {
     return (
       <SafeAreaProvider>
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#b51f28" />
+          <ActivityIndicator size="large" color="#fbbe08" />
           <Text style={styles.loadingText}>Cargando ClubToros...</Text>
         </View>
-        <StatusBar style="light" backgroundColor="#b51f28" />
+        <StatusBar style="light" backgroundColor="#fbbe08" />
       </SafeAreaProvider>
     );
   }

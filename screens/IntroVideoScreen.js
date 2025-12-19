@@ -8,7 +8,7 @@ const IntroVideoScreen = ({ onVideoEnd }) => {
   const [hasFinished, setHasFinished] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const overlayOpacity = useRef(new Animated.Value(1)).current;
-  const videoOpacity = useRef(new Animated.Value(0.001)).current;
+  const videoOpacity = useRef(new Animated.Value(1)).current;
 
   // Crear el reproductor de video
   const player = useVideoPlayer(require('../assets/reel.mp4'), (player) => {
