@@ -16,6 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { theme } from '../utils/theme';
+import { sendTorosPasswordResetEmail } from '../utils/authService';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -54,18 +55,20 @@ const ForgotPasswordScreen = ({ navigation }) => {
     if (validateForm()) {
       setIsLoading(true);
       try {
-        // Nota: Esta funcionalidad requiere implementación personalizada
-        // ya que no usamos Firebase Auth, solo Firestore
+        const result = await sendTorosPasswordResetEmail(correo.trim());
+
+        // Siempre imprimir el message que regresa el backend
         Alert.alert(
-          'Funcionalidad no disponible',
-          'Para recuperar tu código de acceso, contacta al administrador del sistema.',
-          [
-            { text: 'OK', onPress: () => navigation.navigate('Login') }
-          ]
+          result?.ok ? 'Listo' : 'Atención',
+          result?.message || 'Respuesta inválida del servidor.'
         );
+
+        if (result?.ok) {
+          navigation.navigate('Login');
+        }
       } catch (error) {
         console.error('Error:', error);
-        Alert.alert('Error', 'Ocurrió un error. Por favor, contacta al administrador.');
+        Alert.alert('Error', error?.message || 'Ocurrió un error. Por favor, intenta de nuevo.');
       } finally {
         setIsLoading(false);
       }

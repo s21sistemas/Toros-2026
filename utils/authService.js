@@ -107,4 +107,35 @@ export async function registerUser({ nombreCompleto, correo, telefono, ocupacion
   return { id: ref.id, ...payload };
 }
 
+export async function sendTorosPasswordResetEmail(correo) {
+  const url = 'https://test.prostafsse.ngrok.app/sendTorosPasswordResetEmail';
+
+  const resp = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ correo }),
+  });
+
+  // Aunque el backend debería responder JSON siempre, manejamos casos raros
+  let data;
+  try {
+    data = await resp.json();
+  } catch (_) {
+    data = null;
+  }
+
+  if (!resp.ok) {
+    const message = data?.message || 'Ocurrió un error al solicitar la recuperación de contraseña.';
+    const err = new Error(message);
+    err.data = data;
+    err.status = resp.status;
+    throw err;
+  }
+
+  // Esperado: { ok: boolean, message: string }
+  return data || { ok: false, message: 'Respuesta inválida del servidor.' };
+}
+
 
