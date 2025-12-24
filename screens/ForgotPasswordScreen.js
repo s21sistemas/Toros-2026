@@ -16,6 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { theme } from '../utils/theme';
+import { sendTorosPasswordResetEmail } from '../utils/authService';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -54,31 +55,20 @@ const ForgotPasswordScreen = ({ navigation }) => {
     if (validateForm()) {
       setIsLoading(true);
       try {
-        const url = 'https://test.prostafsse.ngrok.app/sendPasswordResetEmail';
+        const result = await sendTorosPasswordResetEmail(correo.trim());
 
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ correo: correo.trim() }),
-        });
-
-        if (!response.ok) {
-          throw new Error('Respuesta no válida del servidor');
-        }
-
+        // Siempre imprimir el message que regresa el backend
         Alert.alert(
-          'Correo enviado',
-          'Se ha enviado la contraseña a tu correo electrónico.',
-          [{ text: 'OK', onPress: () => navigation.navigate('Login') }]
+          result?.ok ? 'Listo' : 'Atención',
+          result?.message || 'Respuesta inválida del servidor.'
         );
+
+        if (result?.ok) {
+          navigation.navigate('Login');
+        }
       } catch (error) {
         console.error('Error:', error);
-        Alert.alert(
-          'Error',
-          'Ocurrió un error al enviar la contraseña. Por favor, inténtalo de nuevo más tarde.'
-        );
+        Alert.alert('Error', error?.message || 'Ocurrió un error. Por favor, intenta de nuevo.');
       } finally {
         setIsLoading(false);
       }
