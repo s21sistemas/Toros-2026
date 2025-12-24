@@ -163,7 +163,7 @@ const RegisterScreen = ({ navigation }) => {
           </div>
           <div style="background:#2f2f2f; color:#fff; text-align:center; padding:16px; font-size:12px;">
             © 2025 <strong>Club Toros</strong>. Todos los derechos reservados.<br/>
-            <a href="mailto:info@clubtoros.com" style="color:#fff; text-decoration:none;">info@clubToros.mx</a> | <a href="tel:+528120039628" style="color:#fff; text-decoration:none;">8120039628</a>
+            <a href="mailto:info@clubtoros.com" style="color:#fff; text-decoration:none;">info@clubtoros.com</a> | <a href="tel:+528180507808" style="color:#fff; text-decoration:none;">81 8050 7808</a>
           </div>
         </div>
       </div>
@@ -208,7 +208,7 @@ Para finalizar el proceso y ser parte oficial del club, necesitamos que subas lo
 Visita: https://sistem.clubtoros.com/subir-documentos?uid=${uid}
 
 Equipo de soporte Club Toros
-info@clubToros.mx | 8120039628`;
+info@clubtoros.com | 81 8050 7808`;
 
       await MailComposer.composeAsync({
         recipients: [email],
@@ -429,7 +429,7 @@ const styles = StyleSheet.create({
   },
   leftColumn: {
     flex: 1,
-    backgroundColor: '#b51f28',
+    backgroundColor: theme.colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { auth } from './firebaseConfig';
+import { theme } from './utils/theme';
 
 // Screens
 import LoginScreen from './screens/LoginScreen';
@@ -17,6 +18,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import PagosScreen from './screens/PagosScreen';
 import EquipamientoScreen from './screens/EquipamientoScreen';
 import AvisosScreen from './screens/AvisosScreen';
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,7 +38,7 @@ const MainTabs = () => (
         }
         return <Ionicons name={iconName} size={size} color={color} />;
       },
-      tabBarActiveTintColor: '#b51f28',
+      tabBarActiveTintColor: theme.colors.primary,
       tabBarInactiveTintColor: 'gray',
       tabBarStyle: { backgroundColor: '#fff' },
     })}

@@ -14,6 +14,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import { theme } from '../utils/theme';
 
 const { width, height } = Dimensions.get('window');
 
@@ -135,7 +136,7 @@ const EquipamientoScreen = ({ route, navigation }) => {
   if (loading && !refreshing) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#b51f28" />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
         <Text style={styles.loadingText}>Cargando equipamiento...</Text>
       </View>
     );
@@ -180,8 +181,8 @@ const EquipamientoScreen = ({ route, navigation }) => {
                 <RefreshControl
                   refreshing={refreshing}
                   onRefresh={onRefresh}
-                  colors={['#b51f28']}
-                  tintColor="#b51f28"
+                  colors={[theme.colors.primary]}
+                  tintColor={theme.colors.primary}
                 />
               }
               ListEmptyComponent={
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: '#b51f28',
+    color: theme.colors.warning,
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -254,7 +255,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   retryButton: {
-    backgroundColor: '#b51f28',
+    backgroundColor: theme.colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 25,
     borderRadius: 5,
@@ -281,7 +282,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#b51f28',
+    color: theme.colors.primary,
     marginBottom: 5,
     textTransform: 'uppercase',
     textAlign: 'center',

@@ -2,7 +2,7 @@ export default {
   expo: {
     name: "ClubToros",
     slug: "toros-app-dev",
-    version: "2.1.0",
+    version: "3.0.0",
     orientation: "portrait",
     icon: "./assets/logoToros.jpg",
     userInterfaceStyle: "light",
@@ -18,8 +18,8 @@ export default {
     ],
     ios: {
       supportsTablet: true,
-      bundleIdentifier: "com.mx.s1sistem.ClubToros",
-      buildNumber: "3.1.0",
+      bundleIdentifier: "com.mx.s21sistem.ClubToros",
+      buildNumber: "3.0.0",
       icon: "./assets/logoToros.jpg",
       deploymentTarget: "15.1",
       config: {
@@ -43,7 +43,7 @@ export default {
     },
     android: {
       package: "com.mx.s1sistem.ClubToros",
-      versionCode: 10,
+      versionCode: 5,
       adaptiveIcon: {
         foregroundImage: "./assets/logoToros.jpg",
         backgroundColor: "#ffffff"

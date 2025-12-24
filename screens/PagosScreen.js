@@ -6,6 +6,7 @@ import { Calendar } from "react-native-calendars";
 import { collection, query, where, onSnapshot, getDoc, doc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { Ionicons } from "@expo/vector-icons";
+import { theme } from '../utils/theme';
 import * as FileSystem from 'expo-file-system';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import * as Sharing from 'expo-sharing';
@@ -410,10 +411,10 @@ const generatePDF = async (pago) => {
             <div class="header">
               ${logo ? `<img src="${logo}" class="logo" alt="Logo Club Toros" />` : ''}
               <div class="header-content">
-                <div class="club-name">CLUB TOROS DE LA ANÁHUAC</div>
-                <div class="club-subtitle">FRATERNIDAD LEGÍTIMOS TOROS, A.C.</div>
-                <div class="club-address">Porfirio Barba Jacob No. 901, Col. Anáhuac, San Nicolás de los Garza, N.L.</div>
-                <div class="club-phone">Tel. 81-2003-9628</div>
+                <div class="club-name">CLUB TOROS DE SAN NICOLAS</div>
+                <div class="club-subtitle">SEMILLERO DE LEYENDAS</div>
+                <div class="club-address">Club Toros San Nicolás., Cedeco, 66427 San Nicolás de los Garza, N.L.</div>
+                <div class="club-phone">Tel. 81 8050 7808</div>
               </div>
             </div>
   
@@ -534,7 +535,7 @@ const generatePDF = async (pago) => {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#b51f28" />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
         <Text style={styles.loadingText}>Cargando información de pagos...</Text>
       </View>
     );
@@ -902,7 +903,7 @@ const styles = StyleSheet.create({
     color: "#777",
   },
   retryButton: {
-    backgroundColor: "#b51f28",
+    backgroundColor: theme.colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 25,
     borderRadius: 5,
@@ -1061,7 +1062,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   downloadButton: {
-    backgroundColor: "#b51f28",
+    backgroundColor: theme.colors.primary,
     borderRadius: 5,
     padding: 8,
     alignItems: "center",

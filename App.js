@@ -208,7 +208,7 @@ const App = () => {
               ),
               title: 'Registrar Jugador',
               headerTitleAlign: 'center',
-              headerStyle: { backgroundColor: '#b51f28' },
+              headerStyle: { backgroundColor: theme.colors.primary },
               headerTintColor: '#fff',
             })}
           />

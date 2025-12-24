@@ -294,7 +294,7 @@ const ProfileScreen = ({ navigation }) => {
   if (loading) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" color="#b51f28" />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
         <Text style={styles.loadingText}>Cargando datos del usuario...</Text>
       </View>
     );
@@ -351,10 +351,10 @@ const ProfileScreen = ({ navigation }) => {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            colors={['#b51f28']} // Android
-            tintColor={'#b51f28'} // iOS
+            colors={[theme.colors.primary]} // Android
+            tintColor={theme.colors.primary} // iOS
             title="Actualizando..." // iOS
-            titleColor={'#b51f28'} // iOS
+            titleColor={theme.colors.primary} // iOS
           />
         }
       >

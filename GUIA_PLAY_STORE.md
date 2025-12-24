@@ -70,7 +70,7 @@ Si tienes el keystore con el SHA1 correcto (`6C:1F:32:AD:BD:FA:A9:3F:3B:E2:E8:6C
    ```
 
 2. **Descarga el AAB:**
-   - Ve a: https://expo.dev/accounts/ulises933/projects/potros-app-dev/builds
+   - Ve a: https://expo.dev/accounts/ulises933/projects/toros-app-dev/builds
    - Descarga el archivo `.aab` del build más reciente
 
 3. **Sube a Play Store:**

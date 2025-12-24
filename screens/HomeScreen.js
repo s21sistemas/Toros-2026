@@ -2873,7 +2873,7 @@ const DocumentacionForm = ({ formData, setFormData, onSubmit, uploadProgress, cu
           <Text style={styles.regulationTitle}>Reglamento del Equipo</Text>
           
           <TouchableOpacity 
-            onPress={() => Linking.openURL('https://admin.clubtoros.com/politicas/ReglamentoToros.pdf')} 
+            onPress={() => Linking.openURL('https://clubtoros.com/img/2025%20REGLAMENTO%20PADRES%20CLUB%20TOROS%20OTON%cc%83O%202025.pdf')} 
             style={styles.regulationLink}
           >
             <Text style={styles.regulationLinkText}>Descargue, lea y firme el reglamento</Text>
@@ -3405,7 +3405,7 @@ const styles = StyleSheet.create({
     color: '#444',
   },
   uploadButton: {
-    backgroundColor: '#b51f28',
+    backgroundColor: theme.colors.primary,
     padding: 12,
     borderRadius: 6,
     alignItems: 'center',
@@ -3444,7 +3444,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   disabledButton: {
-    backgroundColor: '#b51f28',
+    backgroundColor: theme.colors.warning,
   },
   webInput: {
     borderWidth: 1,
@@ -3597,7 +3597,7 @@ const styles = StyleSheet.create({
   },
 
   signatureButton: {
-    backgroundColor: '#b51f28',
+    backgroundColor: theme.colors.primary,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 5,
@@ -3668,7 +3668,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   signatureButton: {
-    backgroundColor: '#b51f28',
+    backgroundColor: theme.colors.primary,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 5,
