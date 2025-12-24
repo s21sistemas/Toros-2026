@@ -4,7 +4,7 @@
       "method": ["GET", "POST", "PUT"],
       "origin": [
         "http://localhost:5173",
-        "https://admin.clubtoros.mx",
+        "https://admin.clubtoros.com",
         "http://localhost:8081"
       ]
     }
