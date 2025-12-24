@@ -180,7 +180,7 @@ const AvisosScreen = ({ navigation }) => {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#b51f28" />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
     );
   }
@@ -207,7 +207,7 @@ const AvisosScreen = ({ navigation }) => {
             { opacity: fadeAnim }
           ]}
         >
-          <Ionicons name="notifications-off" size={48} color="#b51f28" />
+          <Ionicons name="notifications-off" size={48} color={theme.colors.primary} />
           <Text style={styles.noAvisosText}>No tienes avisos pendientes</Text>
           <Text style={styles.noAvisosSubtext}>Cuando tengas notificaciones, aparecerán aquí</Text>
         </Animated.View>
