@@ -59,13 +59,13 @@ const MainTabs = () => (
   </Tab.Navigator>
 );
 
+SplashScreen.preventAutoHideAsync().catch(() => {});
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authError, setAuthError] = useState(null);
   const [showIntroVideo, setShowIntroVideo] = useState(SKIP_INTRO_FOR_TESTS);
-
-  SplashScreen.preventAutoHideAsync();
 
   useEffect(() => {
     let unsubscribe;

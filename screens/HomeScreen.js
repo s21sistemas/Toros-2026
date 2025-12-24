@@ -1560,16 +1560,16 @@ const TipoInscripcionForm = ({ formData, setFormData, errors, onNext, navigation
           )}
 
           {/* Separador */}
-          {existingPlayers.length > 0 && (
+          {/* {existingPlayers.length > 0 && (
             <View style={styles.separator}>
               <View style={styles.separatorLine} />
               <Text style={styles.separatorText}>O busca por CURP/MFL</Text>
               <View style={styles.separatorLine} />
             </View>
-          )}
+          )} */}
 
           {/* Búsqueda manual */}
-          <View style={styles.searchSection}>
+          {/* <View style={styles.searchSection}>
             <TextInput
               style={styles.input}
               placeholder="Ingresa CURP (18 caracteres) o MFL (6 dígitos)"
@@ -1609,7 +1609,7 @@ const TipoInscripcionForm = ({ formData, setFormData, errors, onNext, navigation
                 )}
               </LinearGradient>
             </TouchableOpacity>
-          </View>
+          </View> */}
 
           {foundPlayer && (
             <View style={styles.playerInfoContainer}>

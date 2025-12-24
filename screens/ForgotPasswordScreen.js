@@ -54,18 +54,31 @@ const ForgotPasswordScreen = ({ navigation }) => {
     if (validateForm()) {
       setIsLoading(true);
       try {
-        // Nota: Esta funcionalidad requiere implementación personalizada
-        // ya que no usamos Firebase Auth, solo Firestore
+        const url = 'https://test.prostafsse.ngrok.app/sendPasswordResetEmail';
+
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ correo: correo.trim() }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Respuesta no válida del servidor');
+        }
+
         Alert.alert(
-          'Funcionalidad no disponible',
-          'Para recuperar tu código de acceso, contacta al administrador del sistema.',
-          [
-            { text: 'OK', onPress: () => navigation.navigate('Login') }
-          ]
+          'Correo enviado',
+          'Se ha enviado la contraseña a tu correo electrónico.',
+          [{ text: 'OK', onPress: () => navigation.navigate('Login') }]
         );
       } catch (error) {
         console.error('Error:', error);
-        Alert.alert('Error', 'Ocurrió un error. Por favor, contacta al administrador.');
+        Alert.alert(
+          'Error',
+          'Ocurrió un error al enviar la contraseña. Por favor, inténtalo de nuevo más tarde.'
+        );
       } finally {
         setIsLoading(false);
       }
